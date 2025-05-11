@@ -2,31 +2,31 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
     paths:
       - 'index.html'
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write      # deploy-pages için şart
-      contents: read       # repo içeriğini okuyabilmesi için şart
-      pages: write         # GitHub Pages'a yazabilmesi için şart
+      id-token: write
+      contents: read
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '.'
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.'
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

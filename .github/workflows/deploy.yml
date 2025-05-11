@@ -1,19 +1,18 @@
+# .github/workflows/deploy.yml
+
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - index.html
+    branches: [main]
+
+permissions:
+  contents: read
+  id-token: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      id-token: write
 
     steps:
       - name: Checkout
@@ -28,5 +27,4 @@ jobs:
           path: .
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4
